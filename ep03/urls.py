@@ -1,6 +1,10 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
-urlpatterns =[
-    url(r'^post/$',views.PostListAPIView.as_view()),
-    url(r'post/(?P<pk>\d+)/$',views.PostDetailAPIView.as_view()),
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register(r'user',views.UserViewSet)
+router.register(r'post',views.PostViewSet)
+urlpatterns = [
+
+    url(r'',include(router.urls))
 ]
